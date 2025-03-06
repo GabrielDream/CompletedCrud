@@ -1,6 +1,7 @@
 const express = require('express'); 
 const User = require('../Models/User'); 
 const { param } = require('../../CrudGit2/Routes/userRoutes');
+const req = require('express/lib/request');
 const router = express.Router(); 
 
 //ADD:
@@ -47,5 +48,24 @@ router.get ('/user', async (req, res) => {
         res.status(500).send('IMPOSSIBLE TO LIST!'); 
     }
 });
+
+
+//DELETE FUNCTION:
+router.delete('/user/:id', async (req, res) => {
+    try {
+        const {id} = req.params; 
+
+        const user = await User.findById(id); 
+
+        if(!user) {
+            return res.status(404).send('USER DIDNT FOUN!'); 
+        }
+
+        await User.findByIdAndDelete(id); 
+        res.status(200).send('DELETED!'); 
+    }catch (err) {
+        res.status(500).send('ERROR IN DELETING FUNCTION!'); 
+    }
+}); 
 
 module.exports = router;
