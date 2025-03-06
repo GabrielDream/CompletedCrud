@@ -40,8 +40,34 @@ async function userList() {
         const li = document.createElement('li'); 
         li.textContent = user.name; 
 
+
+        //DELETING BUUTTON:>
+        const delButton = document.createElement('button'); 
+        delButton.textContent = "DELETE!!"; 
+        delButton.style.marginLeft = "10px"; 
+        delButton.onclick = () => deleteUser (user._id);
+
         userList.appendChild(li); 
+        li.appendChild(delButton);  
     });
+}
+
+//DELETE FUNCTION!
+async function deleteUser (id) {
+    if(!confirm("DELETE THIS DATA?!")) {
+        return; 
+    }
+
+    const response = await fetch (`http://localhost:3040/api/user/${id}`, {
+        method: 'DELETE'
+    }); 
+
+    if(response.ok) {
+        alert("DELETED!"); 
+        userList(); 
+    }else {
+        alert("ERROR IN DELETING FUNCTION!M FIX THIS CODE!"); 
+    }
 }
 
 window.onload = userList;
