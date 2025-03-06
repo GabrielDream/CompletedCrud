@@ -25,5 +25,3 @@ async function addUser () {
         alert("ERROR IN ADDING!"); 
     }
 }
-
-
