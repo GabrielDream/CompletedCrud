@@ -20,7 +20,10 @@ async function addUser () {
     }
     else if(response.status === 201) {
         alert ("DATA SUCESSFULY ADDED!"); 
+        userList();
     }else {
         alert("ERROR IN ADDING!"); 
     }
 }
+
+
