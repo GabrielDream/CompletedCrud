@@ -25,3 +25,23 @@ async function addUser () {
         alert("ERROR IN ADDING!"); 
     }
 }
+
+
+//userList:
+async function userList() {
+    const response = await fetch ('http://localhost:3040/api/user');
+
+    const users = await response.json(); 
+
+    const userList = document.getElementById('userList'); 
+    userList.innerHTML = ""; 
+
+    users.forEach (user => {
+        const li = document.createElement('li'); 
+        li.textContent = user.name; 
+
+        userList.appendChild(li); 
+    });
+}
+
+window.onload = userList;
