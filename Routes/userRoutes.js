@@ -38,5 +38,14 @@ router.post ('/add-user', async (req, res) => {
     }
 });
 
+//LISTUSER:
+router.get ('/user', async (req, res) => {
+    try{
+        const users = await User.find(); 
+        res.json(users);
+    }catch (err) {
+        res.status(500).send('IMPOSSIBLE TO LIST!'); 
+    }
+});
 
 module.exports = router;
