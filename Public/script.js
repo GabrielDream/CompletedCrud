@@ -7,51 +7,66 @@ async function addUser() {
         return;
     }
 
-    const response = await fetch('http://localhost:3040/api/add-user', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email })
-    });
+    try{
+        const response = await fetch('http://localhost:3040/api/add-user', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email })
+        });
 
-    if (response.status === 400) {
-        const errorMessage = await response.text();
-        alert(errorMessage);
-    } else if (response.status === 201) {
+        
+        if (response.status === 400) {
+            const errorMessage = await response.text();
+            alert(errorMessage);
+        } 
+        else if (response.status === 201) {
         alert("DATA SUCCESSFULLY ADDED!");
         userList();
-    } else {
-        alert("ERROR IN ADDING!");
+        }
+        else {
+            alert("ERROR IN ADDING!");
+        }
+
+    }catch (err) { 
+        alert("NETWORK ERROR! TRY AGAIN.");
+        console.error("Error in addUser():", error);
     }
 }
 
 // Função para listar usuários
 async function userList() {
-    const response = await fetch('http://localhost:3040/api/user');
-    const users = await response.json();
+    try{
+        const response = await fetch('http://localhost:3040/api/user');
+        const users = await response.json();
 
-    const userList = document.getElementById('userList');
-    userList.innerHTML = "";
+        const userList = document.getElementById('userList');
+        userList.innerHTML = "";
 
-    users.forEach(user => {
-        const li = document.createElement('li');
-        li.textContent = `${user.name} - ${user.email}`;
+        users.forEach(user => {
+            const li = document.createElement('li');
+            li.textContent = `${user.name} - ${user.email}`;
+    
+            // Botão de deletar
+            const delButton = document.createElement('button');
+            delButton.textContent = "DELETE";
+            delButton.style.marginLeft = "10px";
+            delButton.onclick = () => deleteUser(user._id);
+    
+            // Botão de atualização
+            const updateButton = document.createElement('button');
+            updateButton.textContent = "UPDATE";
+            updateButton.style.marginLeft = "10px";
+            updateButton.onclick = () => userUpdate(user._id, user.name, user.email);
+    
+            li.appendChild(delButton);
+            li.appendChild(updateButton);
+            userList.appendChild(li);
+        });
 
-        // Botão de deletar
-        const delButton = document.createElement('button');
-        delButton.textContent = "DELETE";
-        delButton.style.marginLeft = "10px";
-        delButton.onclick = () => deleteUser(user._id);
-
-        // Botão de atualização
-        const updateButton = document.createElement('button');
-        updateButton.textContent = "UPDATE";
-        updateButton.style.marginLeft = "10px";
-        updateButton.onclick = () => userUpdate(user._id, user.name, user.email);
-
-        li.appendChild(delButton);
-        li.appendChild(updateButton);
-        userList.appendChild(li);
-    });
+    }catch (err) {
+        alert("NETWORK ERROR! TRY AGAIN.");
+        console.error("Error in addUser():", error);
+    }
 }
 
 // Função para deletar usuário
@@ -60,15 +75,22 @@ async function deleteUser(id) {
         return;
     }
 
-    const response = await fetch(`http://localhost:3040/api/user/${id}`, {
-        method: 'DELETE'
-    });
+    try{
+        const response = await fetch(`http://localhost:3040/api/user/${id}`, {
+            method: 'DELETE'
+        });
+           
+        if (response.ok) {
+            alert("DELETED!");
+            userList();
+        }
+        else {
+            alert("ERROR IN DELETING FUNCTION! FIX THIS CODE!");
+        }
 
-    if (response.ok) {
-        alert("DELETED!");
-        userList();
-    } else {
-        alert("ERROR IN DELETING FUNCTION! FIX THIS CODE!");
+    }catch (err) {
+        alert("NETWORK ERROR! TRY AGAIN.");
+        console.error("Error in deleteUser():", error);
     }
 }
 
@@ -113,7 +135,7 @@ async function userUpdate(userId, currentName, currentEmail) {
         }
     };
 
-    // Criar e exibir div para edição
+    // Criar e exibir div para edição'
     const editDiv = document.createElement("div");
     editDiv.appendChild(nameInput);
     editDiv.appendChild(emailInput);
