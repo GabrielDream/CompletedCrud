@@ -1,0 +1,121 @@
+/* Reset básico para remover margens e definir fonte */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Centraliza os elementos na tela */
+body {
+    background-color: #f4f4f4;
+    font-family: Arial, sans-serif;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Estiliza o título principal */
+h1 {
+    color: #333; 
+    margin-bottom: 20px;
+}
+
+/* Estiliza os campos de entrada de texto */
+input {
+    width: 250px;
+    padding: 10px;
+    margin: 5px;
+    border: 1px solid #ccc; 
+    border-radius: 3px;
+}
+
+/* Estiliza os botões */
+button {
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #d4d4d4;
+    color: white; 
+    border-radius: 4px;
+    border: none;
+    cursor: pointer; 
+    transition: 0.3s;
+}
+
+/* Efeito de hover nos botões */
+button:hover {
+    background-color:#b5b4b4;
+}
+
+/* Estiliza a lista de usuários */
+#userList {
+    list-style: none;
+    width: 300px;
+    margin-top: 20px;
+}
+
+/* Estiliza cada item da lista */
+#userList li {
+    display: flex;
+    justify-content: flex-start; /* Garante que o conteúdo esteja alinhado à esquerda inicialmente */
+    align-items: center;
+    background: white;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Garantindo que os botões fiquem alinhados à direita */
+#userList li button {
+
+    background-color: #dc3545;
+    padding: 5px 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    border: none;
+    cursor: pointer;
+}
+
+/* Efeito de hover nos botões */
+#userList button:hover {
+    background-color: #c82333;
+}
+
+
+
+/* Efeito de hover nos botões da lista */
+#userList button:hover{
+    background-color: #c82333;
+}
+
+/* Estiliza a área de edição dos usuários */
+.edit-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    margin-top: 10px;
+}
+
+/* Ajusta o espaçamento dentro da área de edição */
+.edit-div input {
+    margin-bottom: 10px;
+}
+
+/* Responsividade: adapta os elementos para telas menores */
+@media (max-width: 600px) {
+    input {
+        width: 100%;
+    }
+    #userList {
+        width: 100%;
+    }
+    button {
+        width: 100%;
+    }
+}
