@@ -1,0 +1,37 @@
+name: Node.js CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'  # ou qualquer versão que você esteja usando no seu projeto
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Run tests
+      run: npm test  # ou qualquer comando que você use para rodar os testes, se tiver
+
+    - name: Lint code
+      run: npm run lint  # Caso tenha um script para linting, se não, pode remover essa linha
+
+    - name: Build the project
+      run: npm run build  # Se você tiver um script de build no seu package.json, se não, pode remover também
+
+    - name: Deploy (opcional)
+      run: npm run deploy  # Se você tiver um script de deploy, se não, pode remover essa linha
