@@ -65,7 +65,7 @@ async function userList() {
 
     }catch (err) {
         alert("NETWORK ERROR! TRY AGAIN.");
-        console.error("Error in addUser():", error);
+        console.error("Error in userList():", err);
     }
 }
 
