@@ -92,6 +92,11 @@ router.put('/user/:id', async (req, res) => {
             return res.status(400).send('THIS EMAIL IS ALREADY BEING USED! CHOOSE ANOTHER ONE!'); 
         }
 
+        //if the user didnt make any change:
+        if(user.name === name && user.email === email) {
+            return res.status(400).send('ANY CHANGE MADE!'); 
+        }
+
         //FINALLY, UPDATE DATA:
         user.name = name;
         user.email = email; 

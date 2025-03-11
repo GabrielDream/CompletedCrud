@@ -117,6 +117,11 @@ async function userUpdate(userId, currentName, currentEmail) {
             return;
         }
 
+        if(newName === nameInput && newEmail === emailInput){
+            alert("ANY CHANGE MADE!"); 
+            return;
+        }
+
         try {
             const response = await fetch(`http://localhost:3040/api/user/${userId}`, {
                 method: 'PUT',
